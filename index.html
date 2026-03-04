@@ -28,8 +28,7 @@
             text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
         .status-dot {
-            height: 10px;
-            width: 10px;
+            height: 10px; width: 10px;
             background-color: #22c55e;
             border-radius: 50%;
             display: inline-block;
@@ -45,7 +44,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
 
-    <div class="text-center mb-12 animate-fade-in">
+    <div class="text-center mb-12">
         <div class="glass-card px-4 py-2 rounded-full text-xs font-mono inline-flex items-center gap-2 mb-6">
             <span class="status-dot"></span> PIPELINE STATUS: ACTIVE
         </div>
@@ -58,26 +57,25 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl w-full px-4">
-        
-        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-orange-500/50 group">
+        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-orange-500/50 group text-center md:text-left">
             <i class="fab fa-jenkins text-4xl text-orange-500 mb-6 group-hover:scale-110 transition-transform"></i>
             <h3 class="text-xl font-bold mb-2">Jenkins</h3>
             <p class="text-slate-500 text-sm leading-relaxed">Automation server orchestrating build, test, and deploy stages.</p>
         </div>
 
-        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-sky-500/50 group">
+        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-sky-500/50 group text-center md:text-left">
             <i class="fab fa-docker text-4xl text-sky-400 mb-6 group-hover:scale-110 transition-transform"></i>
             <h3 class="text-xl font-bold mb-2">Docker</h3>
             <p class="text-slate-500 text-sm leading-relaxed">Containerizing the application for consistent environments.</p>
         </div>
 
-        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-yellow-500/50 group">
+        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-yellow-500/50 group text-center md:text-left">
             <i class="fab fa-aws text-4xl text-yellow-500 mb-6 group-hover:scale-110 transition-transform"></i>
             <h3 class="text-xl font-bold mb-2">AWS EC2</h3>
             <p class="text-slate-500 text-sm leading-relaxed">Cloud infrastructure hosting the production environment.</p>
         </div>
 
-        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-red-500/50 group">
+        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-red-500/50 group text-center md:text-left">
             <i class="fas fa-code-branch text-4xl text-red-400 mb-6 group-hover:scale-110 transition-transform"></i>
             <h3 class="text-xl font-bold mb-2">Webhooks</h3>
             <p class="text-slate-500 text-sm leading-relaxed">Triggering automated builds on every GitHub code push.</p>
@@ -97,13 +95,22 @@
         </div>
     </div>
 
-    <div class="mt-16 text-center">
-        <p class="text-slate-500 text-sm uppercase tracking-widest">Project Engineered by</p>
-        <h2 class="text-2xl font-bold text-white mt-1">Jatin Kapoor</h2>
-        <div class="mt-4 flex gap-4 justify-center">
-            <a href="#" class="hover:text-sky-400 transition-colors"><i class="fab fa-github"></i></a>
-            <a href="#" class="hover:text-sky-400 transition-colors"><i class="fab fa-linkedin"></i></a>
+    <div class="mt-16 text-center pb-10">
+        <p class="text-slate-500 text-sm uppercase tracking-widest mb-2">Project Engineered by</p>
+        <h2 class="text-3xl font-bold text-white mb-6">Jatin Kapoor</h2>
+        
+        <div class="flex gap-6 justify-center">
+            <a href="https://github.com/jatinkapoor009" target="_blank" class="glass-card w-12 h-12 flex items-center justify-center rounded-full hover:bg-white hover:text-black transition-all duration-300 text-xl">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/jatin-kapoor1/" target="_blank" class="glass-card w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#0077b5] hover:text-white transition-all duration-300 text-xl">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
         </div>
+        
+        <p class="mt-8 text-slate-600 text-xs font-mono tracking-tighter italic">
+            &copy; 2026 AutoDeployX Pipeline | All Systems Nominal
+        </p>
     </div>
 
 </body>
