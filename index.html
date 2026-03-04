@@ -1,22 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AutoDeployX CI/CD Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoDeployX | Jatin Kapoor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glow-text {
+            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            70% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
 
-<h1>Welcome to AutoDeployX CI/CD Project 🚀</h1>
+    <div class="text-center mb-12 animate-fade-in">
+        <div class="glass-card px-4 py-2 rounded-full text-xs font-mono inline-flex items-center gap-2 mb-6">
+            <span class="status-dot"></span> PIPELINE STATUS: ACTIVE
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter">
+            <span class="glow-text">AutoDeployX</span>
+        </h1>
+        <p class="text-slate-400 text-lg md:text-xl font-light">
+            Automated CI/CD Orchestration with <span class="text-white font-medium">Real-time Deployment</span>
+        </p>
+    </div>
 
-<p>This project demonstrates a complete CI/CD pipeline using:</p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl w-full px-4">
+        
+        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-orange-500/50 group">
+            <i class="fab fa-jenkins text-4xl text-orange-500 mb-6 group-hover:scale-110 transition-transform"></i>
+            <h3 class="text-xl font-bold mb-2">Jenkins</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Automation server orchestrating build, test, and deploy stages.</p>
+        </div>
 
-<ul>
-<li>AWS EC2</li>
-<li>Docker</li>
-<li>Jenkins</li>
-<li>GitHub Webhooks</li>
-</ul>
+        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-sky-500/50 group">
+            <i class="fab fa-docker text-4xl text-sky-400 mb-6 group-hover:scale-110 transition-transform"></i>
+            <h3 class="text-xl font-bold mb-2">Docker</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Containerizing the application for consistent environments.</p>
+        </div>
 
-<h2>Created by: Jatin</h2>
+        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-yellow-500/50 group">
+            <i class="fab fa-aws text-4xl text-yellow-500 mb-6 group-hover:scale-110 transition-transform"></i>
+            <h3 class="text-xl font-bold mb-2">AWS EC2</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Cloud infrastructure hosting the production environment.</p>
+        </div>
+
+        <div class="glass-card p-8 rounded-3xl transition-all hover:-translate-y-2 hover:border-red-500/50 group">
+            <i class="fas fa-code-branch text-4xl text-red-400 mb-6 group-hover:scale-110 transition-transform"></i>
+            <h3 class="text-xl font-bold mb-2">Webhooks</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Triggering automated builds on every GitHub code push.</p>
+        </div>
+    </div>
+
+    <div class="max-w-6xl w-full mt-10 px-4">
+        <div class="glass-card rounded-2xl p-6 font-mono text-xs text-slate-400">
+            <div class="flex gap-2 mb-2">
+                <div class="h-3 w-3 rounded-full bg-red-500/50"></div>
+                <div class="h-3 w-3 rounded-full bg-yellow-500/50"></div>
+                <div class="h-3 w-3 rounded-full bg-green-500/50"></div>
+            </div>
+            <p>> [INFO] Fetching changes from GitHub...</p>
+            <p>> [SUCCESS] Docker Image 'autodeployx:latest' built.</p>
+            <p class="text-green-400">> [DEPLOY] Container running on Port 80. Zero downtime achieved.</p>
+        </div>
+    </div>
+
+    <div class="mt-16 text-center">
+        <p class="text-slate-500 text-sm uppercase tracking-widest">Project Engineered by</p>
+        <h2 class="text-2xl font-bold text-white mt-1">Jatin Kapoor</h2>
+        <div class="mt-4 flex gap-4 justify-center">
+            <a href="#" class="hover:text-sky-400 transition-colors"><i class="fab fa-github"></i></a>
+            <a href="#" class="hover:text-sky-400 transition-colors"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
 
 </body>
 </html>
