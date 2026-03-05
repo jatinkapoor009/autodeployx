@@ -1,4 +1,4 @@
-pipeline {
+e {
     agent any
     
     environment {
@@ -52,6 +52,20 @@ pipeline {
                 sh "docker rm -f autodeployx-container || true"
                 sh "docker run -d -p 80:80 --name autodeployx-container ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
             }
+        }
+    }
+
+    // Bas ye section add kiya hai email notification ke liye
+    post {
+        success {
+            mail to: 'jatink9599@gmail.com',
+                 subject: "Success: Build #${env.BUILD_NUMBER} of ${env.JOB_NAME}",
+                 body: "Bhai, Mubarak ho! Pipeline successfully khatam ho gayi hai.\nBuild Number: ${env.BUILD_NUMBER}\nCheck yahan karo: ${env.BUILD_URL}"
+        }
+        failure {
+            mail to: 'jatink9599@gmail.com',
+                 subject: "Failure: Build #${env.BUILD_NUMBER} of ${env.JOB_NAME}",
+                 body: "Oops! Build fail ho gayi hai. Jaldi check karo kya hua: ${env.BUILD_URL}console"
         }
     }
 }
