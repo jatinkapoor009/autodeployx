@@ -1,4 +1,4 @@
-e {
+ {
     agent any
     
     environment {
