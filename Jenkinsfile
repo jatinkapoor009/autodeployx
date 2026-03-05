@@ -1,8 +1,7 @@
- {
+pipeline {
     agent any
     
     environment {
-        // Updated Username
         DOCKER_HUB_USER = 'jatink9599' 
         IMAGE_NAME = 'autodeployx'
     }
@@ -16,14 +15,12 @@
 
         stage('Build & Tag Image') {
             steps {
-                // Image ko aapke naye username ke sath tag kiya hai
                 sh "docker build -t ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest -t ${DOCKER_HUB_USER}/${IMAGE_NAME}:${env.BUILD_NUMBER} ."
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
-                // Jenkins credentials 'docker-hub-creds' use honge
                 withCredentials([usernamePassword(credentialsId: 'docker-token-new', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
                     sh "echo \$DOCKER_HUB_PASSWORD | docker login -u \$DOCKER_HUB_USERNAME --password-stdin"
                     sh "docker push ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
@@ -55,7 +52,6 @@
         }
     }
 
-    // Bas ye section add kiya hai email notification ke liye
     post {
         success {
             mail to: 'jatink9599@gmail.com',
@@ -68,4 +64,4 @@
                  body: "Oops! Build fail ho gayi hai. Jaldi check karo kya hua: ${env.BUILD_URL}console"
         }
     }
-}
+
