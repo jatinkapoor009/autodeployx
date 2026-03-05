@@ -50,7 +50,7 @@ pipeline {
                 sh "docker run -d -p 80:80 --name autodeployx-container ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
             }
         }
-    }
+    } // Yahan stages khatam
 
     post {
         success {
@@ -63,5 +63,5 @@ pipeline {
                  subject: "Failure: Build #${env.BUILD_NUMBER} of ${env.JOB_NAME}",
                  body: "Oops! Build fail ho gayi hai. Jaldi check karo kya hua: ${env.BUILD_URL}console"
         }
-    }
-
+    } 
+} 
