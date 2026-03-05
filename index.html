@@ -7,9 +7,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Plus+Jakarta+Sans:wght@200;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'dark',
+            securityLevel: 'loose',
+            flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
+        });
+        // This ensures the diagram re-renders when switching tabs
+        window.reRenderMermaid = () => {
+            mermaid.run();
+        };
     </script>
     
     <style>
@@ -46,8 +56,8 @@
         .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        /* Mermaid styling */
-        .mermaid { background: transparent !important; }
+        /* Mermaid Diagram custom style */
+        .mermaid { background: transparent !important; color: white !important; }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -100,8 +110,8 @@
                         <p class="text-xs text-sky-500 font-bold mb-1 uppercase tracking-widest">Lead Engineer</p>
                         <h2 class="text-3xl font-bold text-white mb-4">Jatin Kapoor</h2>
                         <div class="flex gap-4">
-                            <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fab fa-github"></i></a>
-                            <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:bg-[#0077b5] hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/jatinkapoor009" target="_blank" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/jatin-kapoor1/" target="_blank" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:bg-[#0077b5] hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <i class="fas fa-user-shield absolute -bottom-4 -right-4 text-8xl text-white/5 group-hover:text-sky-500/10 transition-colors"></i>
@@ -118,12 +128,16 @@
                         <div class="space-y-6 relative">
                             <div class="absolute left-[15px] top-2 bottom-2 w-px bg-slate-800"></div>
                             <div class="relative flex items-start gap-6 p-4 rounded-xl bg-sky-500/5 border-l-2 border-sky-500">
-                                <div class="w-8 h-8 rounded-full bg-sky-500 flex items-center justify-center z-10 text-black"><i class="fas fa-check text-xs"></i></div>
-                                <div><h4 class="font-bold text-white text-sm">GitHub Webhook</h4><p class="text-[10px] text-slate-500">Triggered on push</p></div>
+                                <div class="w-8 h-8 rounded-full bg-sky-500 flex items-center justify-center z-10 text-black font-bold text-xs">01</div>
+                                <div><h4 class="font-bold text-white text-sm">GitHub Webhook</h4><p class="text-[10px] text-slate-500">Listening for Push Events on main</p></div>
                             </div>
                             <div class="relative flex items-start gap-6 p-4">
-                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center z-10 text-slate-500"><i class="fab fa-docker"></i></div>
-                                <div><h4 class="font-bold text-slate-300 text-sm">Docker Build</h4><p class="text-[10px] text-slate-500">Optimizing Image</p></div>
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center z-10 text-slate-500 font-bold text-xs border border-white/5">02</div>
+                                <div><h4 class="font-bold text-slate-300 text-sm">Dockerize</h4><p class="text-[10px] text-slate-500">Building light-weight images</p></div>
+                            </div>
+                            <div class="relative flex items-start gap-6 p-4">
+                                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center z-10 text-slate-500 font-bold text-xs border border-white/5">03</div>
+                                <div><h4 class="font-bold text-slate-300 text-sm">Staging Env</h4><p class="text-[10px] text-slate-500">Internal Review at Port 8081</p></div>
                             </div>
                         </div>
                     </div>
@@ -132,35 +146,40 @@
                 <div id="architecture" class="tab-content space-y-6">
                     <div class="glass-card p-8 rounded-[2.5rem]">
                         <h3 class="text-sm font-bold uppercase tracking-widest mb-6 text-slate-500 flex items-center gap-2">
-                            <i class="fas fa-project-diagram text-sky-500"></i> System Architecture
+                            <i class="fas fa-project-diagram text-sky-500"></i> CI/CD Architecture Flow
                         </h3>
-                        <div class="mermaid">
+                        <div class="mermaid flex justify-center py-4">
                             graph TD
-                                Dev[fa:fa-code Developer] -->|Git Push| GH(fa:fa-github GitHub)
-                                GH -->|Webhook| J[fa:fa-gears Jenkins]
-                                J -->|Build| D[fa:fa-docker Docker Image]
-                                D -->|Deploy| ST[fa:fa-vial Staging:8081]
-                                ST -->|Approval| PR[fa:fa-rocket Production:80]
-                                
+                                Dev[Developer] -->|Git Push| GH(GitHub)
+                                GH -->|Webhook| J[Jenkins Server]
+                                J -->|Docker Build| DI[Docker Image]
+                                DI -->|Run Container| ST[Staging:8081]
+                                ST -->|Manual Approval| PR[Production:80]
+
                                 style J fill:#0ea5e9,stroke:#fff,color:#000
                                 style PR fill:#22c55e,stroke:#fff,color:#000
                                 style ST fill:#f59e0b,stroke:#fff,color:#000
+                                style GH fill:#334155,stroke:#fff,color:#fff
                         </div>
+                        <p class="text-[10px] text-center text-slate-500 mt-4 italic font-mono">Real-time automation flow from Local to Cloud</p>
                     </div>
                 </div>
 
                 <div id="logs" class="tab-content space-y-6">
                     <div class="glass-card p-8 rounded-[2.5rem] font-mono text-xs overflow-hidden">
                         <div class="flex justify-between items-center mb-4">
-                            <span class="text-sky-500">jenkins_console.log</span>
-                            <span class="text-slate-600">Live Stream</span>
+                            <span class="text-sky-500 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-sky-500 rounded-full animate-pulse"></span>
+                                jenkins_console.log
+                            </span>
+                            <span class="text-slate-600">v2.4.0</span>
                         </div>
-                        <div class="bg-black/50 p-4 rounded-xl border border-white/5 space-y-2 text-sky-400/70">
-                            <p><span class="text-slate-600">[14:02:11]</span> Checking for changes in GitHub...</p>
-                            <p><span class="text-slate-600">[14:02:15]</span> <span class="text-white">Commit:</span> "Updated Architecture View"</p>
-                            <p><span class="text-slate-600">[14:02:20]</span> Running: docker build -t autodeployx .</p>
-                            <p><span class="text-green-500">●</span> <span class="text-slate-300">Container autodeployx-staging started on port 8081</span></p>
-                            <span class="inline-block w-2 h-4 bg-sky-500 animate-pulse"></span>
+                        <div class="bg-black/50 p-6 rounded-xl border border-white/5 space-y-3 text-sky-400/80">
+                            <p><span class="text-slate-600">[14:02:11]</span> Cloning repository from GitHub...</p>
+                            <p><span class="text-slate-600">[14:02:15]</span> <span class="text-white">Build:</span> autodeployx version 1.0.2</p>
+                            <p><span class="text-slate-600">[14:02:20]</span> <span class="text-green-400">SUCCESS:</span> Image built and pushed.</p>
+                            <p><span class="text-slate-600">[14:02:22]</span> <span class="text-amber-500">PROMPT:</span> Awaiting manual approval for PROD.</p>
+                            <span class="inline-block w-2 h-4 bg-sky-500 animate-pulse align-middle"></span>
                         </div>
                     </div>
                 </div>
@@ -174,11 +193,21 @@
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             // Show selected tab
-            document.getElementById(tabId).classList.add('active');
+            const activeTab = document.getElementById(tabId);
+            activeTab.classList.add('active');
             
+            // Re-render mermaid diagram if architecture tab is selected
+            if(tabId === 'architecture') {
+                window.reRenderMermaid();
+            }
+
             // Update Nav Styles
             document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('text-white', 'border-b-2', 'border-sky-500');
+                if(link.innerText.toLowerCase() === tabId) {
+                    link.classList.add('text-white', 'font-bold');
+                } else {
+                    link.classList.remove('text-white', 'font-bold');
+                }
             });
         }
     </script>
