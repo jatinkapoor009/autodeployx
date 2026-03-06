@@ -19,6 +19,18 @@ pipeline {
             }
         }
 
+        // ==========================================
+        // TRIVY SECURITY SCAN CODE STARTS HERE
+        // ==========================================
+        stage('Security Scan (Trivy)') {
+            steps {
+                script {
+                    sh "trivy image --severity CRITICAL --exit-code 1 ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
+                }
+            }
+        }
+        // ==========================================
+
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-token-new', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
@@ -50,18 +62,18 @@ pipeline {
                 sh "docker run -d -p 80:80 --name autodeployx-container ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
             }
         }
-    } // Yahan stages khatam
+    } 
 
     post {
         success {
             mail to: 'jatink9599@gmail.com',
                  subject: "Success: Build #${env.BUILD_NUMBER} of ${env.JOB_NAME}",
-                 body: "Bhai, Mubarak ho! Pipeline successfully khatam ho gayi hai.\nBuild Number: ${env.BUILD_NUMBER}\nCheck yahan karo: ${env.BUILD_URL}"
+                 body: "Bhai, Mubarak ho! Pipeline successfully khatam ho gayi hai aur Trivy scan bhi pass ho gaya."
         }
         failure {
             mail to: 'jatink9599@gmail.com',
                  subject: "Failure: Build #${env.BUILD_NUMBER} of ${env.JOB_NAME}",
-                 body: "Oops! Build fail ho gayi hai. Jaldi check karo kya hua: ${env.BUILD_URL}console"
+                 body: "Oops! Build fail ho gayi hai. Console check karo: ${env.BUILD_URL}console"
         }
     } 
-} 
+}
